@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secret Letter Coder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    textarea {
+      width: 80%;
+      height: 100px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Secret Letter Coder</h1>
+  <p>Type your message below:</p>
+  <textarea id="inputText" oninput="encodeText()" placeholder="Enter your message here..."></textarea>
+
+  <p>Encoded message:</p>
+  <textarea id="outputText" readonly placeholder="Encoded message will appear here..."></textarea>
+
+  <script>
+    const cipher = {
+      A: "K", B: "X", C: "L", D: "Q", E: "R", F: "Z", G: "Y",
+      H: "B", I: "M", J: "C", K: "T", L: "U", M: "N", N: "V",
+      O: "S", P: "D", Q: "A", R: "O", S: "E", T: "F", U: "J",
+      V: "W", W: "G", X: "H", Y: "P", Z: "I"
+    };
+
+    function encodeText() {
+      const input = document.getElementById("inputText").value;
+      let output = "";
+
+      for (let char of input) {
+        const upperChar = char.toUpperCase();
+        if (cipher[upperChar]) {
+          // preserve original case
+          output += (char === char.toLowerCase()) ? cipher[upperChar].toLowerCase() : cipher[upperChar];
+        } else {
+          output += char; // keep spaces, punctuation, etc.
+        }
+      }
+
+      document.getElementById("outputText").value = output;
+    }
+  </script>
+
+</body>
+</html>
